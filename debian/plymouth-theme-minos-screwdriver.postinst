@@ -1,0 +1,35 @@
+#!/bin/sh
+set -e
+
+case "${1}" in
+    configure)
+        update-alternatives \
+            --install /lib/plymouth/themes/default.plymouth default.plymouth \
+	    /lib/plymouth/themes/minos-screwdriver/minos-screwdriver.plymouth 100
+
+        update-alternatives \
+            --set default.plymouth /lib/plymouth/themes/minos-screwdriver/minos-screwdriver.plymouth
+
+        mkdir -p /etc/initramfs-tools/conf.d/
+        if [ -f /etc/initramfs-tools/conf.d/splash ]; then
+            if ! grep "^FRAMEBUFFER=y" /etc/initramfs-tools/conf.d/splash >/dev/null 2>/dev/null; then
+                echo "FRAMEBUFFER=y" >> /etc/initramfs-tools/conf.d/splash
+            fi
+        else
+            echo "FRAMEBUFFER=y" >> /etc/initramfs-tools/conf.d/splash
+        fi
+
+        update-initramfs -u
+	;;
+
+    abort-upgrade|abort-deconfigure|abort-remove)
+	;;
+
+    *)
+	printf "%s\\n" "${0} called with unknown argument \`${1}'" 1>&2
+	exit 1
+	;;
+esac
+
+#DEBHELPER#
+exit 0

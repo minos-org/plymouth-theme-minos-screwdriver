@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Minos
+Description=Minos screwdriver plymouth theme
+ModuleName=script
+
+[script]
+ImageDir=/lib/plymouth/themes/minos-screwdriver
+ScriptFile=/lib/plymouth/themes/minos-screwdriver/minos-screwdriver.script
