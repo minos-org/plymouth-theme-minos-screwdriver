@@ -8,6 +8,8 @@
 
 ## Quick start
 
+### On Ubuntu (only LTS releases)
+
 1. Set up the minos archive:
 
    ```
@@ -22,12 +24,13 @@
 
 3. Enjoy ☺!
 
-## Uninstalling
+### On other Linux distributions
 
-If by any reason you dislike [plymouth-minos-screwdriver](https://github.com/minos-org/plymouth-theme-minos-screwdriver) you can uninstall it as any other deb package: 
-   ```
-   $ sudo apt-get remove plymouth-theme-minos-screwdriver
-   ```
+1. Type `sudo mkdir -p /lib/plymouth/themes/minos-screwdriver/`
+
+2. Copy files `sudo cp *png *.plymouth *.script /lib/plymouth/themes/minos-screwdriver/`
+
+3. Set the default theme and rebuild the initramfs file `plymouth-set-default-theme -R minos-screwdriver`
 
 ## Feedback
 
